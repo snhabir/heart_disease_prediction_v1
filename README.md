@@ -1,1 +1,1 @@
-# Heart Disease Prediction V 2.0
+# Heart Disease Prediction V 1.0
