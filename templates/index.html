@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Disease Prediction by SNH-Abir</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>  <style>
+body {
+  font-family: 'Open Sans', sans-serif;  /* Use the loaded font here */
+  background-image: linear-gradient(to right top, #ffa6ff, #b3ffb8, #82e0aa, #42c0f0, #1691d7);  /* Feel free to adjust these colors! */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;  /* Keep Pacifico for the title */
+  color: #333;
+  text-align: center;
+}
+h3 {
+  font-family: 'Pacifico', cursive;  /* Keep Pacifico for the title */
+  color: #333;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+select, input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #38b000;  /* A nice green color */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #2e7d00;
+}
+
+.result {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Added footnote styling */
+footer {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+  color: #aaa;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Heart Disease Prediction</h1>
+  <h3>Version 1.0</h3>
+  <form action="{{ url_for('predict') }}" method="post">
+    <div class="form-group">
+      <label for="BMI">What is your BMI:</label>
+      <input type="text" id="BMI" name="BMI" placeholder="Enter BMI" required>
+    </div>
+    <div class="form-group">
+      <label for="PhysicalHealth">Rate your Physical Health between 0 to 30:</label>
+      <input type="number" id="PhysicalHealth" name="PhysicalHealth" placeholder="Enter Physical Health" required>
+    </div>
+    <div class="form-group">
+      <label for="MentalHealth">Rate your Mental Health between 0 to 30:</label>
+      <input type="number" id="MentalHealth" name="MentalHealth" placeholder="Enter Mental Health" required>
+    </div>
+    <div class="form-group">
+      <label for="DiffWalking">Have you Difficulty in Walking:</label>
+      <select name="DiffWalking" id="DiffWalking" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="AgeCategory">In which Age Category do you belong:</label>
+      <select name="AgeCategory" id="AgeCategory" required>
+        <option value="0">18-24</option>
+        <option value="1">25-29</option>
+	<option value="2">30-34</option>
+	<option value="3">35-39</option>
+	<option value="4">40-44</option>
+	<option value="5">45-49</option>
+	<option value="6">50-54</option>
+	<option value="7">55-59</option>
+	<option value="8">60-64</option>
+	<option value="9">65-69</option>
+	<option value="10">70-74</option>
+	<option value="11">75-79</option>
+	<option value="12">80 or older</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="Race">In which Race do you belong:</label>
+      <select name="Race" id="Race" required>
+        <option value="0">American Indian/Alaskan Native</option>
+        <option value="1">Asian</option>
+        <option value="3">Hispanic</option>
+        <option value="5">White</option>
+        <option value="2">Black</option>
+        <option value="4">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="GenHealth">What is your Generel Health Status:</label>
+      <select name="GenHealth" id="GenHealth" required>
+        <option value="3">Poor</option>
+        <option value="1">Fair</option>
+        <option value="2">Good</option>
+        <option value="4">Very Good</option>
+        <option value="0">Excellent</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="SleepTime">How many hours do your Sleep:</label>
+      <input type="text" id="SleepTime" name="SleepTime" placeholder="Enter Sleep Time" required>
+    </div>
+    <button type="submit">Predict</button>
+  </form>
+  {% if prediction_text %}
+  <div class="result">
+    <p>{{ prediction_text }}</p>
+  </div>
+  {% endif %}
+</div>
+</body>
+<footer>
+  Deployed by SNH-Abir
+</footer>
+</html>
